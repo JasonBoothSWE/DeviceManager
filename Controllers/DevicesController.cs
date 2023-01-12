@@ -19,14 +19,14 @@ namespace DeviceManager.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Device>>> GetDevices()
         {
-            return await _context.Devices.ToListAsync();
+            return await _context.Device.ToListAsync();
         }
 
         // GET: api/Devices/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Device>> GetDevice(long id)
         {
-            var device = await _context.Devices.FindAsync(id);
+            var device = await _context.Device.FindAsync(id);
 
             if (device == null)
             {
@@ -72,7 +72,7 @@ namespace DeviceManager.Controllers
         [HttpPost]
         public async Task<ActionResult<Device>> PostDevice(Device device)
         {
-            _context.Devices.Add(device);
+            _context.Device.Add(device);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetDevice", new { id = device.Id }, device);
@@ -82,13 +82,13 @@ namespace DeviceManager.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDevice(long id)
         {
-            var device = await _context.Devices.FindAsync(id);
+            var device = await _context.Device.FindAsync(id);
             if (device == null)
             {
                 return NotFound();
             }
 
-            _context.Devices.Remove(device);
+            _context.Device.Remove(device);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -96,7 +96,7 @@ namespace DeviceManager.Controllers
 
         private bool DeviceExists(long id)
         {
-            return _context.Devices.Any(e => e.Id == id);
+            return _context.Device.Any(e => e.Id == id);
         }
     }
 }

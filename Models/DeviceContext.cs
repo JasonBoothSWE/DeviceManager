@@ -9,6 +9,6 @@ namespace DeviceManager.Models
         {
         }
 
-        public DbSet<Device> Devices { get; set; } = null!;
+        public DbSet<Device> Device { get; set; } = default!;
     }
 }
