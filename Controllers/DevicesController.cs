@@ -4,7 +4,7 @@ using DeviceManager.Models;
 
 namespace DeviceManager.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/DevicesController")]
     [ApiController]
     public class DevicesController : ControllerBase
     {
