@@ -12,9 +12,14 @@ builder.Services.AddDbContext<DeviceContext>( opt =>
     opt.UseInMemoryDatabase("DeviceManager"));
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "DeviceApi", Version = "v1" });
+    //c.SwaggerDoc("v1", new() { Title = "DeviceApi", Version = "v1" });
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "DeviceApi",
+        Version = "v1",
+        Description = "Api tool to manage live operating devices",      
+    });
 });
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -35,8 +40,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DeviceApi v1"));
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "DeviceApi v1");
+        var sidebar = Path.Combine(builder.Environment.ContentRootPath, "wwwroot/custom-sidebar.html");
+        c.HeadContent = File.ReadAllText(sidebar);
+        c.InjectStylesheet("/css/swagger-custom.css");
+    });
 }
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
