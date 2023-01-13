@@ -80,7 +80,7 @@ namespace DeviceManager.Controllers
 
         // DELETE: api/Devices/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDevice(long id)
+        public async Task<IActionResult> DeleteDevice(int id)
         {
             var device = await _context.Device.FindAsync(id);
             if (device == null)

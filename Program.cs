@@ -7,7 +7,6 @@ builder.Services.AddDbContext<DeviceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DeviceContext") ?? throw new InvalidOperationException("Connection string 'DeviceContext' not found.")));
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 builder.Services.AddDbContext<DeviceContext>( opt =>
     opt.UseInMemoryDatabase("DeviceManager"));
